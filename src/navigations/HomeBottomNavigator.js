@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HOME, CONSULT, CLASSES, PROFILE } from "./../constants/routeNames";
 import Home from "../screens/Home";
-import Consult from "../screens/Home";
+import Consult from "../screens/Consult";
 import Classes from "../screens/Classes";
 import Profile from "../screens/Profile";
 

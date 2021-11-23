@@ -9,7 +9,29 @@ export default StyleSheet.create({
     fontSize: 20,
     color: colors.BLACK,
   },
-  bellowSearchView: {
+  scrollCard: {
+    flex: 1,
+    height: 200,
+    backgroundColor: "white",
+    borderRadius: 20,
+  },
+  contentContainer: {},
+  contentHeaderWrapper: {
     flexDirection: "row",
+    paddingTop: 5,
+    justifyContent: "space-between",
+  },
+  contentHeaderLeft: {
+    fontSize: 17,
+    color: colors.BLACK,
+  },
+  cardWrapper: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  contentHeaderRight: {
+    fontSize: 17,
+    color: colors.PRIMARY,
   },
 });

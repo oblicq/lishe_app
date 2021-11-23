@@ -20,6 +20,6 @@ be used situationally to distinguish UI elements such as a floating action butto
   /*The primary color tends to be the most displayed color in your app’s UI 
   elements. It can also be used to accent certain UI elements. Using dark 
   and light variants of your primary color can create a contrast between 
-  the UI elements. These variations can be used situationally to distinguish 
+  the UI elements. These variations can be used situational to distinguish 
 UI elements such as a floating action button and the icon inside it.*/
 }

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, StyleSheet, Image } from "react-native";
-import CustomButton from "../CustomButton/index";
+
 import Input from "../Input/index";
 import Container from "../common/container/index";
+import ClassCard from "../common/classcard/ClassCard";
 import styles from "./styles";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 import { FORGOT_PASSWORD, REGISTER } from "./../../constants/routeNames";
+
+// import search icon
+import { EvilIcons } from "@expo/vector-icons";
+import colors from "../../assets/theme/colors";
 
 function HomeMain() {
   const { navigate } = useNavigation();
@@ -16,36 +21,25 @@ function HomeMain() {
       <View style={styles.headerWrapper}></View>
       <View style={styles.contentWrapper}>
         <View>
-          <Text style={styles.welcomeMessage}>Welcome John</Text>
+          <Text style={styles.welcomeMessage}>Welcome John ..</Text>
         </View>
-        <Input iconPosition="right" placeholder="Search" />
-        <View style={styles.bellowSearchView}>
-          <Text style={styles.welcomeMessage}> John</Text>
-          <Text style={styles.welcomeMessage}>Welcome John</Text>
-        </View>
-
-        <View style={styles.bottomWrapper}>
-          <View style={styles.form}></View>
-          <CustomButton primary title="Login" />
-          <View style={styles.createSection}>
-            <Text style={styles.infoText}>Need a new account?</Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigate(REGISTER);
-              }}
-            >
-              <Text style={styles.linkButton}>Please Register</Text>
+        <Input
+          iconPosition="right"
+          placeholder="Search"
+          icon={<EvilIcons name="search" size={24} color={colors.ACCENT} />}
+        />
+        <View style={styles.scrollCard}></View>
+        <View style={styles.contentContainer}>
+          <View style={styles.contentHeaderWrapper}>
+            <Text style={styles.contentHeaderLeft}>Classes</Text>
+            <TouchableOpacity>
+              <Text style={styles.contentHeaderRight}>View All</Text>
             </TouchableOpacity>
           </View>
-
-          <View style={styles.forgotPassSection}>
-            <TouchableOpacity
-              onPress={() => {
-                navigate(FORGOT_PASSWORD);
-              }}
-            >
-              <Text style={styles.linkButton}>Forgot Password</Text>
-            </TouchableOpacity>
+          <View style={styles.cardWrapper}>
+            <ClassCard />
+            <ClassCard />
+            <ClassCard />
           </View>
         </View>
       </View>
