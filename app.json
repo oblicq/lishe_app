@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "lishe_app",
+    "slug": "lishe_app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "lishe_app"
+}
