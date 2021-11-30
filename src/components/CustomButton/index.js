@@ -13,6 +13,7 @@ const CustomButton = ({
   label,
   secondary,
   primary,
+
   danger,
   disabled,
   loading,

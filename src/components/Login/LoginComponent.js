@@ -23,7 +23,7 @@ import { useNavigation } from "@react-navigation/core";
 import { FORGOT_PASSWORD, REGISTER } from "./../../constants/routeNames";
 import { color } from "react-native-reanimated";
 
-const ForgotPass = () => {
+const LoginComponent = () => {
   const { navigate } = useNavigation();
   const [data, setData] = React.useState({
     email: "",
@@ -112,7 +112,7 @@ const ForgotPass = () => {
     </View>
   );
 };
-export default ForgotPass;
+export default LoginComponent;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,68 +1,218 @@
 import React from "react";
-import { Text, View, TextInput, StyleSheet, Image } from "react-native";
-import CustomButton from "../CustomButton/index";
-import Input from "../Input/index";
-import Container from "../common/container/index";
-import styles from "./styles";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  Platform,
+  StatusBar,
+  Alert,
+} from "react-native";
+import * as Animatable from "react-native-animatable";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Feather from "react-native-vector-icons/Feather";
+
+import colors from "../../assets/theme/colors";
+import Input from "./../Input/index";
+import CustomButton from "./../CustomButton/index";
+import { NavigationContainer } from "@react-navigation/native";
+
 import { useNavigation } from "@react-navigation/core";
-import { LOGIN } from "../../constants/routeNames";
+import { FORGOT_PASSWORD, REGISTER, LOGIN } from "./../../constants/routeNames";
+import { color } from "react-native-reanimated";
 
-function RegisterComponent() {
+const RegisterComponent = () => {
   const { navigate } = useNavigation();
-  return (
-    <Container>
-      <Image
-        style={styles.logoImage}
-        height={70}
-        width={70}
-        source={require("../../assets/images/logo.png")}
-      ></Image>
-      <View>
-        <Text style={styles.title}>Welcome to Lishenaloy App</Text>
-        <Text style={styles.subTitle}>Create a free account</Text>
-      </View>
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+    confirm_password: "",
+    secureTextEntry: true,
+    confirm_secureTextEntry: true,
+  });
 
-      <View style={styles.bottomWrapper}>
-        <View style={styles.form}>
-          <Input
-            iconPosition="right"
-            label="First name"
-            placeholder="Enter first name"
-          />
-          <Input
-            iconPosition="right"
-            label="First name"
-            placeholder="Enter last name"
-          />
-          <Input iconPosition="right" placeholder="Enter email address" />
-          <Input
-            icon={<Text>Show</Text>}
-            secureTextEntry={true}
-            placeholder="Enter Password"
-            iconPosition="right"
-          />
-          <Input
-            icon={<Text>Show</Text>}
-            secureTextEntry={true}
-            placeholder="Repeat Password"
-            iconPosition="right"
-          />
-        </View>
-        <CustomButton primary title="Register" />
-        <View style={styles.createSection}>
-          <Text style={styles.infoText}>Already have an account?</Text>
+  const textInputChange = (value) => {
+    if (value.length != 0) {
+      setData({
+        ...data,
+        email: value,
+      });
+    } else {
+      setData({
+        ...data,
+        email: value,
+      });
+    }
+  };
+
+  const handlePasswordChange = (value) => {
+    setData({
+      ...data,
+      password: value,
+    });
+  };
+
+  const handleConfirmPasswordChange = (value) => {
+    setData({
+      ...data,
+      confirm_password: value,
+    });
+  };
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
+  const updateConfirmSecureTextEntry = () => {
+    setData({
+      ...data,
+      confirm_secureTextEntry: !data.confirm_secureTextEntry,
+    });
+  };
+  return (
+    <View style={styles.container}>
+      <StatusBar backgroundColor={colors.PRIMARY} barStyle="light-content" />
+      <View style={styles.header}>
+        <Text style={styles.text_header}>Please Sing Up</Text>
+      </View>
+      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <Input
+          label="Email"
+          onChangeText={(value) => textInputChange(value)}
+          iconPosition="right"
+          placeholder="Enter Email"
+        />
+        <Input
+          label="Password"
+          icon={
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ? (
+                <Feather name="eye-off" color="grey" size={20} />
+              ) : (
+                <Feather name="eye" color={colors.PRIMARY} size={20} />
+              )}
+            </TouchableOpacity>
+          }
+          secureTextEntry={data.secureTextEntry ? true : false}
+          placeholder="Enter Password"
+          onChangeText={(value) => handlePasswordChange(value)}
+          iconPosition="right"
+        />
+        <Input
+          label="Password"
+          icon={
+            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+              {data.confirm_secureTextEntry ? (
+                <Feather name="eye-off" color="grey" size={20} />
+              ) : (
+                <Feather name="eye" color={colors.PRIMARY} size={20} />
+              )}
+            </TouchableOpacity>
+          }
+          secureTextEntry={data.confirm_secureTextEntry ? true : false}
+          placeholder="Confirm Password"
+          onChangeText={(value) => handleConfirmPasswordChange(value)}
+          iconPosition="right"
+        />
+        <CustomButton primary title="Register now" />
+
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text>You have an account?</Text>
           <TouchableOpacity
             onPress={() => {
               navigate(LOGIN);
             }}
           >
-            <Text style={styles.linkButton}>Login</Text>
+            <Text style={styles.register_text}>Please Sign In</Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </Container>
+        <View style={{ paddingTop: 10, alignSelf: "center" }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate(FORGOT_PASSWORD);
+            }}
+          >
+            <Text style={styles.register_text}>Forgot Password</Text>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+    </View>
   );
-}
-
+};
 export default RegisterComponent;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.PRIMARY,
+  },
+  header: {
+    flex: 1,
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  footer: {
+    flex: 3,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  text_header: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  register_text: {
+    color: colors.PRIMARY,
+  },
+  text_footer: {
+    color: "#05375a",
+    fontSize: 18,
+  },
+  action: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f2f2f2",
+    paddingBottom: 5,
+  },
+  actionError: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#FF0000",
+    paddingBottom: 5,
+  },
+  textInput: {
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 0 : -12,
+    paddingLeft: 10,
+    color: "#05375a",
+  },
+  errorMsg: {
+    color: "#FF0000",
+    fontSize: 14,
+  },
+  button: {
+    alignItems: "center",
+    marginTop: 50,
+  },
+  signIn: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});

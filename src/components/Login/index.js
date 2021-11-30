@@ -1,67 +1,76 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  StatusBar,
+} from "react-native";
 import CustomButton from "../CustomButton/index";
 import Input from "../Input/index";
-import Container from "../common/container/index";
 import styles from "./styles";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 import { FORGOT_PASSWORD, REGISTER } from "./../../constants/routeNames";
 
-function LoginComponent() {
+import authUIText from "../../constants/authUIText";
+import colors from "../../assets/theme/colors";
+
+function Login() {
   const { navigate } = useNavigation();
 
   return (
-    <Container>
-      {/* Home header view */}
-      <View style={styles.headerWrapper}></View>
-      <Image
-        style={styles.logoImage}
-        height={70}
-        width={70}
-        source={require("../../assets/images/logo.png")}
-      ></Image>
-
-      <View>
-        <Text style={styles.title}>Welcome to Lishenaloy App</Text>
-        <Text style={styles.subTitle}>Please login here</Text>
+    <View style={styles.mainWrapper}>
+      <StatusBar barStyle="dark-content" backgroundColor={colors.SUCCESS} />
+      <View style={styles.backgroundImageContainer}>
+        <Text style={styles.welcomeText}>{authUIText.WELCOME_MESSAGE}</Text>
       </View>
 
-      <View style={styles.bottomWrapper}>
-        <View style={styles.form}>
-          <Input label="Email" iconPosition="right" placeholder="Enter email" />
-          <Input
-            label="Password"
-            icon={<Text>Show</Text>}
-            secureTextEntry={true}
-            placeholder="Enter Password"
-            iconPosition="right"
-          />
-        </View>
-        <CustomButton primary title="Login" />
-        <View style={styles.createSection}>
-          <Text style={styles.infoText}>Need a new account?</Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigate(REGISTER);
-            }}
-          >
-            <Text style={styles.linkButton}>Please Register</Text>
-          </TouchableOpacity>
-        </View>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.bottomWrapper}>
+          <View style={styles.form}>
+            <Input
+              label={authUIText.EMAIL}
+              iconPosition="right"
+              placeholder={authUIText.EMAIL_PLACEHOLDER}
+            />
+            <Input
+              label={authUIText.PASSWORD}
+              icon={<Text>Show</Text>}
+              secureTextEntry={true}
+              placeholder={authUIText.PASSWORD_PLACEHOLDER}
+              iconPosition="right"
+            />
+          </View>
+          <CustomButton primary title={authUIText.LOGIN_BUTTON_LABEL} />
+          <View style={styles.createSection}>
+            <Text style={styles.infoText}>{authUIText.REGISTER_LINK}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigate(REGISTER);
+              }}
+            >
+              <Text style={styles.linkButton}>{authUIText.REGISTER_LINK}</Text>
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.forgotPassSection}>
-          <TouchableOpacity
-            onPress={() => {
-              navigate(FORGOT_PASSWORD);
-            }}
-          >
-            <Text style={styles.linkButton}>Forgot Password</Text>
-          </TouchableOpacity>
+          <View style={styles.forgotPassSection}>
+            <TouchableOpacity
+              onPress={() => {
+                navigate(FORGOT_PASSWORD);
+              }}
+            >
+              <Text style={styles.linkButton}>
+                {authUIText.FORGOT_PASSWORD_LINK}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </Container>
+      </ScrollView>
+    </View>
   );
 }
 
-export default LoginComponent;
+export default Login;
