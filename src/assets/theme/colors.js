@@ -4,7 +4,7 @@ export default {
   ACCENT: "#81C442",
   DANGER: "#f72585",
   SUCCESS: "#1469A9",
-  GREY: "#adb5bd",
+  GREY: "#808080",
   WHITE: "#ffffff",
   BLACK: "#000000",
 };

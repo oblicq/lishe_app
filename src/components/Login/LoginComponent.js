@@ -1,27 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
-  TextInput,
   StyleSheet,
-  Dimensions,
   Platform,
   StatusBar,
-  Alert,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
-
 import colors from "../../assets/theme/colors";
 import Input from "./../Input/index";
 import CustomButton from "./../CustomButton/index";
-import { NavigationContainer } from "@react-navigation/native";
-
 import { useNavigation } from "@react-navigation/core";
 import { FORGOT_PASSWORD, REGISTER } from "./../../constants/routeNames";
-import { color } from "react-native-reanimated";
+
+import { AuthContext } from "../../context/context";
 
 const LoginComponent = () => {
   const { navigate } = useNavigation();
@@ -30,6 +24,8 @@ const LoginComponent = () => {
     password: "",
     secureTextEntry: true,
   });
+
+  const { signIn } = useContext(AuthContext);
 
   const textInputChange = (value) => {
     if (value.length != 0) {
@@ -58,6 +54,7 @@ const LoginComponent = () => {
       secureTextEntry: !data.secureTextEntry,
     });
   };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={colors.PRIMARY} barStyle="light-content" />
@@ -87,7 +84,13 @@ const LoginComponent = () => {
           onChangeText={(value) => handlePasswordChange(value)}
           iconPosition="right"
         />
-        <CustomButton primary title="Sign In" />
+        <CustomButton
+          secondary
+          onPress={() => {
+            signIn();
+          }}
+          title="Sign In"
+        />
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text>You dont have an account?</Text>
