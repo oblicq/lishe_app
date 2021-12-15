@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/core";
 function ClassCardListAll({
   className,
   classDesc,
+  imageUri,
   classPrice,
   startDate,
   endDate,
@@ -27,7 +28,11 @@ function ClassCardListAll({
         <View style={styles.productContainer}>
           <View style={styles.pictureContainer}>
             <Image
-              source={require("../../assets/images/totoMix.png")}
+              // source={require("../../assets/images/totoMix.png")}
+              source={imageUri}
+              // source={{
+              //   uri: "https://i.picsum.photos/id/596/200/300.jpg?hmac=pVPfm7n4UQpHw17xww_PzqSAFP5JYEJo6qGFtPJxxA0",
+              // }}
               style={{
                 height: 125,
                 width: 90,
@@ -39,10 +44,12 @@ function ClassCardListAll({
             ></Image>
           </View>
           <View style={styles.productInfoContainer}>
-            <Text style={{ fontSize: 19, fontWeight: "700" }}>{className}</Text>
+            <Text numberOfLines={1} style={{ fontSize: 17, fontWeight: "700" }}>
+              {className}
+            </Text>
             <View style={{ justifyContent: "space-between", height: 95 }}>
               <Text
-                numberOfLines={3}
+                numberOfLines={2}
                 style={{ color: colors.GREY, paddingRight: 10 }}
               >
                 {classDesc}

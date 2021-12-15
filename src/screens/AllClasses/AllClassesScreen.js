@@ -6,21 +6,16 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
-  TextInput,
-  ImageBackground,
 } from "react-native";
 import colors from "../../assets/theme/colors";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { useNavigation } from "@react-navigation/core";
-import ProductCardListAll from "../../components/productCard/ProductCardListAll";
-import { ScrollView } from "react-native-gesture-handler";
-import {
-  HOME,
-  PRODUCT_DETAILS,
-  CLASS_DETAILS,
-} from "../../constants/routeNames";
+
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { HOME, CLASS_DETAILS } from "../../constants/routeNames";
 import SearchTextInput from "../../components/common/SearchTextInput";
 import ClassCardListAll from "../../components/classCard/ClassCardListAll";
+import { classData } from "../../api/classes.js";
 
 function AllClassesScreen() {
   const { navigate } = useNavigation();
@@ -45,25 +40,28 @@ function AllClassesScreen() {
       </View>
 
       {/* End of search Textinput */}
-      <ScrollView>
-        <ClassCardListAll
-          className="Mwaka 1-6"
-          classDesc="Maelezo kuhusu Darasa"
-          startDate="01/12/2021"
-          endDate="24/12/2021"
-          classPrice="Tsh. 45,000/="
-          onPress={() => {
-            navigate(CLASS_DETAILS);
-          }}
-        />
-        <ClassCardListAll
-          className="Mwaka 1-6"
-          classDesc="Maelezo kuhusu Darasa"
-          startDate="01/12/2021"
-          endDate="24/12/2021"
-          classPrice="Tsh. 45,000/="
-        />
-      </ScrollView>
+
+      <FlatList
+        data={classData}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.classId}
+        renderItem={({ item }) => (
+          <ClassCardListAll
+            className={item.className}
+            imageUri={{ uri: item.imageUri }}
+            classDesc={item.classDescription}
+            startDate={item.startDate}
+            endDate={item.endDate}
+            classPrice="Tsh. 45,000/="
+            price={item.price}
+
+            // onPress={() => {
+            //   navigate(PRODUCT_DETAILS);
+            // }}
+          />
+        )}
+      />
     </View>
   );
 }

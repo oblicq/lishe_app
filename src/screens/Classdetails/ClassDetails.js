@@ -8,14 +8,21 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 import colors from "../../assets/theme/colors";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { useNavigation } from "@react-navigation/core";
 import ProductCardListAll from "../../components/productCard/ProductCardListAll";
 import { ScrollView } from "react-native-gesture-handler";
 import { HOME } from "../../constants/routeNames";
+import ClassOverView from "../Classes/ClassOverView";
+import ClassContent from "../Classes/ClassContents";
+import QuestionAndAnswers from "../Classes/QuestionAndAnswers";
 
 function ClassDetails() {
+  const Tab = createMaterialTopTabNavigator();
+
   const { navigate } = useNavigation();
   return (
     <View style={styles.mainContainer}>
@@ -32,45 +39,14 @@ function ClassDetails() {
             marginVertical: 10,
           }}
         ></Image>
-
-        <View style={styles.productDetailsContainer}>
-          <Text style={styles.consultantName}>Ms. Loyce Victor Njila</Text>
-          <Text style={styles.descriptionText}>BS. in Human Nutrition</Text>
-          <Text style={styles.descriptionText}>
-            Sokoine University of agriculture in Tanzania
-          </Text>
-          <Text style={styles.consultantName}>About</Text>
-
-          <Text style={styles.descriptionText2}>
-            She is a competent Nutritionist and HIV practitioner with robust
-            experience in providing nutrition education and counseling among
-            diverse groups in Tanzania.
-          </Text>
-
-          <TouchableOpacity>
-            <View
-              style={{
-                // flexDirection: "row-reverse",
-                paddingHorizontal: 20,
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: colors.PRIMARY,
-                  height: 46,
-                  justifyContent: "center",
-                  borderRadius: 20,
-                  alignItems: "center",
-                  marginTop: 15,
-                }}
-              >
-                <Text style={{ color: colors.WHITE, marginHorizontal: 20 }}>
-                  Book Appointment
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+        <View style={{ paddingLeft: 20, paddingBottom: 10 }}>
+          <Text style={{ color: colors.BLACK, fontSize: 20 }}>Class Name</Text>
         </View>
+        <Tab.Navigator>
+          <Tab.Screen name="Overview" component={ClassOverView} />
+          <Tab.Screen name="Content" component={ClassContent} />
+          <Tab.Screen name="Q+A" component={QuestionAndAnswers} />
+        </Tab.Navigator>
       </ScrollView>
     </View>
   );
@@ -90,38 +66,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  iconContainer: {
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    backgroundColor: colors.WHITE,
-    height: 40,
-    width: 40,
-    borderColor: colors.BACKGROUND,
-  },
-  productDetailsContainer: {
-    flex: 2,
-    backgroundColor: colors.WHITE,
-    width: "100%",
-
-    borderColor: colors.BACKGROUND,
-  },
-
-  consultantName: {
-    fontSize: 30,
-    paddingLeft: 20,
-    paddingTop: 20,
-    color: colors.BLACK,
-    fontWeight: "bold",
-  },
-  descriptionText: {
-    fontSize: 15,
+  tabHeaderContainer: {
+    borderBottomWidth: 2,
+    borderColor: colors.PRIMARY,
+    backgroundColor: colors.PRIMARY,
     paddingHorizontal: 20,
-    // paddingTop: 10,
-    color: colors.GREY,
-    fontWeight: "bold",
   },
+
   productContainer: {
     flexDirection: "row",
     marginHorizontal: 20,

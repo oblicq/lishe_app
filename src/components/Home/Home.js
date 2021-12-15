@@ -125,7 +125,7 @@ function HomeMain() {
           {/* View for shopping c art icon */}
           <TouchableOpacity>
             <View style={styles.iconContainer}>
-              <AntDesign name="shoppingcart" color={colors.PRIMARY} size={26} />
+              <AntDesign name="shoppingcart" color={colors.GREY} size={26} />
             </View>
           </TouchableOpacity>
         </View>
@@ -241,7 +241,8 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: colors.BACKGROUND,
+    backgroundColor: colors.WHITE,
+    borderColor: colors.WHITE,
   },
   greetingsContainer: {
     flexDirection: "row",

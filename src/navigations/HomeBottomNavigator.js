@@ -25,7 +25,7 @@ const HomeBottomNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={HOME}
-      activeColor={colors.ACCENT}
+      activeColor={colors.PRIMARY}
       inactiveColor={colors.GREY}
       screenOptions={{ headerShown: false }}
       barStyle={{
@@ -40,9 +40,8 @@ const HomeBottomNavigator = () => {
         component={Home}
         options={{
           tabBarLabel: "Home",
-
           tabBarIcon: ({ color }) => (
-            <AntDesign name="home" color={colors.GREY} size={26} />
+            <AntDesign name="home" color={colors.GREY} size={24} />
           ),
         }}
       />
@@ -53,7 +52,7 @@ const HomeBottomNavigator = () => {
         options={{
           tabBarLabel: "Consult",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="home" color={colors.GREY} size={26} />
+            <AntDesign name="home" color={colors.GREY} size={24} />
           ),
         }}
       />
@@ -63,7 +62,7 @@ const HomeBottomNavigator = () => {
         options={{
           tabBarLabel: "Agents",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="solution1" color={colors.GREY} size={26} />
+            <AntDesign name="solution1" color={colors.GREY} size={24} />
           ),
         }}
       />
@@ -73,7 +72,7 @@ const HomeBottomNavigator = () => {
         options={{
           tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="user" color={colors.GREY} size={26} />
+            <AntDesign name="user" color={colors.GREY} size={24} />
           ),
         }}
       />
