@@ -1,64 +1,69 @@
 import React from "react";
+import { Text, View } from "react-native";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-import { HOME, CONSULT, CLASSES, PROFILE } from "./../constants/routeNames";
+import AntDesign from "react-native-vector-icons/AntDesign";
+
+import {
+  HOME,
+  CONSULT,
+  CLASSES,
+  PROFILE,
+  AGENTS,
+} from "./../constants/routeNames";
 import Home from "../screens/Home";
-import Consult from "../screens/Consult";
+import ConsultScreen from "../screens/Consult/ConsultScreen";
 import Classes from "../screens/Classes";
 
 import UserProfileScreen from "./../screens/Profile/UserProfileScreen";
 import colors from "../assets/theme/colors";
+import Agents from "./../screens/Agents/Agents";
 
 const HomeBottomNavigator = () => {
   const Tab = createMaterialBottomTabNavigator();
+
   return (
     <Tab.Navigator
       initialRouteName={HOME}
-      activeColor={colors.PRIMARY}
+      activeColor={colors.ACCENT}
+      inactiveColor={colors.GREY}
       screenOptions={{ headerShown: false }}
-      barStyle={{ backgroundColor: colors.WHITE }}
+      barStyle={{
+        backgroundColor: colors.WHITE,
+        borderWidth: 1,
+        borderColor: colors.BACKGROUND,
+        borderRadius: 20,
+      }}
     >
       <Tab.Screen
         name={HOME}
         component={Home}
         options={{
           tabBarLabel: "Home",
+
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="home-outline"
-              color={colors.PRIMARY}
-              size={26}
-            />
+            <AntDesign name="home" color={colors.GREY} size={26} />
           ),
         }}
       />
+
       <Tab.Screen
         name={CONSULT}
-        component={Consult}
-        options={{
-          tabBarLabel: "Classes",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="home-outline"
-              color={colors.PRIMARY}
-              size={26}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name={CLASSES}
-        component={Classes}
+        component={ConsultScreen}
         options={{
           tabBarLabel: "Consult",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="home-outline"
-              color={colors.PRIMARY}
-              size={26}
-            />
+            <AntDesign name="home" color={colors.GREY} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={AGENTS}
+        component={Agents}
+        options={{
+          tabBarLabel: "Agents",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="solution1" color={colors.GREY} size={26} />
           ),
         }}
       />
@@ -68,7 +73,7 @@ const HomeBottomNavigator = () => {
         options={{
           tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
-            <SimpleLineIcons name="user" color={colors.PRIMARY} size={26} />
+            <AntDesign name="user" color={colors.GREY} size={26} />
           ),
         }}
       />

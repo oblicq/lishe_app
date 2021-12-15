@@ -9,3 +9,13 @@ export const HOME = "Home";
 export const CONSULT = "Consult";
 export const CLASSES = "Classes";
 export const PROFILE = "Profile";
+
+//Product screen route name
+export const ALL_PRODUCT_SCREEN = "All Products";
+export const PRODUCT_DETAILS = "Product Details";
+
+export const ALL_CLASSES = "All Classes";
+export const CLASS_DETAILS = "ClassDetails";
+
+//Agents Screen
+export const AGENTS = "Agents";

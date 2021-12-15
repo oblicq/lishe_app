@@ -15,6 +15,7 @@ const IndexAppNavContainer = () => {
     return {
       signIn: () => {
         setIsLoading(false);
+
         setUserToken("hhh");
       },
       signUp: () => {
@@ -27,6 +28,7 @@ const IndexAppNavContainer = () => {
       },
     };
   }, []);
+
   React.useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
@@ -47,7 +49,7 @@ const IndexAppNavContainer = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {userToken != null ? <HomeBottomNavigator /> : <AuthNavigator />}
+        {userToken != null ? <HomeNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
   );

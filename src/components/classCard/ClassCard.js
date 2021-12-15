@@ -10,14 +10,20 @@ import {
 
 import colors from "../../assets/theme/colors";
 
-function ProductCard({ productName, productDesc, price, imageUri, onPress }) {
+function ClassCard({
+  className,
+  classPrice,
+  description,
+  imageUri,
+  startDate,
+  endDate,
+  onPress,
+}) {
   return (
     <View
       style={{
-        width: 200,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginHorizontal: 4,
+        flex: 1,
+        paddingLeft: 20,
       }}
     >
       {/* PRODUCT CARDS */}
@@ -27,14 +33,14 @@ function ProductCard({ productName, productDesc, price, imageUri, onPress }) {
             width: "100%",
             height: 100,
             marginTop: 10,
+            borderTopRightRadius: 10,
+            borderTopStartRadius: 10,
           }}
         >
           <Image
             style={{
               width: "100%",
               height: 100,
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
             }}
             source={{
               uri: imageUri,
@@ -49,14 +55,19 @@ function ProductCard({ productName, productDesc, price, imageUri, onPress }) {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 17, fontWeight: "700" }}>
-              {productName}
-            </Text>
-            <Text style={{ fontWeight: "bold" }}>{price}</Text>
+            <Text style={{ fontSize: 17, fontWeight: "700" }}>{className}</Text>
           </View>
           <View>
-            <Text numberOfLines={1} style={{ color: colors.GREY }}>
-              {productDesc}
+            <Text style={{ color: colors.GREY }}>{description}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ color: colors.GREY }}>{startDate}</Text>
+              <Text style={{ color: colors.GREY }}>-</Text>
+              <Text style={{ color: colors.GREY }}>{endDate}</Text>
+            </View>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+              {classPrice}
             </Text>
           </View>
         </View>
@@ -65,12 +76,12 @@ function ProductCard({ productName, productDesc, price, imageUri, onPress }) {
   );
 }
 
-export default ProductCard;
+export default ClassCard;
 
 const styles = StyleSheet.create({
   productInfoContainer: {
+    justifyContent: "space-between",
     width: "100%",
-    height: 80,
     backgroundColor: colors.WHITE,
     borderWidth: 1,
     borderColor: colors.BACKGROUND,
